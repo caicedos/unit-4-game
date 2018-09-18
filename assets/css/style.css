@@ -1,0 +1,21 @@
+#crystals {
+    margin-top: 80px;
+}
+
+.crystal-image {
+    width: 200px;
+    height: 200px;
+}
+
+@media only screen and (max-width: 992px) {
+    .crystal-image {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .col-md-3 {
+        width: auto;
+        height: auto;
+    }
+}

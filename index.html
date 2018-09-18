@@ -7,24 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <meta name="viewport" content="width=device-width">
     <title>Crystal Game</title>
-
-    <style>
-
-        #crystals{
-        margin-top: 80px;
-    }
-
-    .crystal-image{
-        width: 200px;
-        height: 200px;
-    }
-
-    </style>
-
-
-
 
 </head>
 
@@ -43,89 +28,59 @@
         <h3>Wins: <span id="wins"></span></h3>
         <h3>Losses: <span id="losses"></span></h3>
 
-
-
         <div id="crystals" class="row">
-            <div class="col-3"><img class="crystal-image" src="./assets/images/Growing-blue-crystal.png" alt="crystals"></div>
-            <div class="col-3"><img class="crystal-image" src="./assets/images/Red-Crystal.png" alt="crystals"></div>
-            <div class="col-3"><img class="crystal-image" src="./assets/images/Growing-green-crystal.png" alt="crystals"></div>
-            <div class="col-3"><img class="crystal-image" src="./assets/images/Purple-crystal.png" alt="crystals"></div>
+            <div class="col-md-3"><img class="crystal-image" src="./assets/images/Growing-blue-crystal.png" alt="crystals"></div>
+            <div class="col-md-3"><img class="crystal-image" src="./assets/images/Red-Crystal.png" alt="crystals"></div>
+            <div class="col-md-3"><img class="crystal-image" src="./assets/images/Growing-green-crystal.png" alt="crystals"></div>
+            <div class="col-md-3"><img class="crystal-image" src="./assets/images/Purple-crystal.png" alt="crystals"></div>
         </div>
     </div>
 
-
-
-    <!-- javascript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var targetNumber = [53, 43, 30];
+            var numberArray = [53, 43, 30];
             var wins = 0;
             var losses = 0;
             var counter = 0;
 
+            var targetNumber = numberArray[Math.floor(Math.random() * numberArray.length)];
+            $("#number-to-guess").text(targetNumber);
 
-            var number = targetNumber[Math.floor(Math.random() * targetNumber.length)];
-            $("#number-to-guess").text(number);
-
-
-
-             function reset(){
-                var number = targetNumber[Math.floor(Math.random() * targetNumber.length)];
-            $("#number-to-guess").text(number);
-            counter = 0;
-             
-            
+            function reset() {
+                var targetNumber = numberArray[Math.floor(Math.random() * numberArray.length)];
+                $("#number-to-guess").text(targetNumber);
+                counter = 0;
             };
 
-
-
-
-
-         
-
             $(".crystal-image").on("click", function () {
-
-
 
                 var numberOptions = [10, 5, 7, 3];
                 for (var i = 0; i < length.numberOptions; i++);
 
-                randomNumber = numberOptions[Math.floor(Math.random()*numberOptions.length)];  
-                 
+                randomNumber = numberOptions[Math.floor(Math.random() * numberOptions.length)];
+                console.log(randomNumber);
+
+                var newScore = counter += randomNumber;
                 
-                
+                $("#new-score").text(newScore);
+                console.log(newScore);
 
-
-                $("#new-score").text(counter+=randomNumber);
-
-
-
-
-
-                if (counter === number) {
-                    $("#wins").text(wins += 1);
+                if (newScore === targetNumber) {
+                    $("#wins").text(wins+=1);
                     reset();
-
-                } else if (counter >= number) {
-                    $("#losses").text(losses += 1);
+                    alert("you win!!");
+                } else if (newScore >= targetNumber) {
+                    $("#losses").text(losses+=1);
                     reset();
+                    alert("You lose!!")
                     console.log(reset);
                 }
-
+                $("new-score").html(counter);
             });
-
-
- $("new-score").html(counter);
-                console.log(counter);
-
-
-
-
-
         });
     </script>
 
